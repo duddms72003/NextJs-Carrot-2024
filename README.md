@@ -1,8 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 매일 트윗 | Maeil Tweet
 
-## Getting Started
+Next.js 포스트 기반 웹 SNS - A Next.js post-based social media web application
 
-First, run the development server:
+## About the Project | 프로젝트 소개
+
+- A post-based social media web application with CRUD features.
+- Users can create accounts and login to publish posts as well as react to the posts of others (i.e., like or comment)
+
+- CRUD 기능이 적용된 포스트 기반의 웹 SNS 프로젝트입니다.
+- 회원가입 및 로그인이 가능하며, 로그인 후 포스트를 작성하고 타인의 포스트에 좋아요 누르기와 댓글 남길 수 있습니다.
+
+## 🚀 Getting Started | 프로젝트 실행 방법
+
+### Please note that this project supports Node.js version 18 or higher.
+
+### 이 프로젝트는 node 18 버전 이상을 지원합니다.
+
+First, please create a `.env` file and create a variable with the name of `COOKIE_PW` and assign the variable a 40-character long password. You could run the following command in the terminal to do this.
+
+먼저 이 레포를 다운 받으시고 나서 `.env` 파일을 만든 후, `.env` 파일 안에 `COOKIE_PW`라는 변수에 최소 40자인 비밀번호를 넣어주세요. 아래 명령어를 실행하면 `COOKIE_PW`가 `.env` 파일 안에 실행됩니다.
+
+```bash
+$ echo "COOKIE_PW=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | head -c 40)" > .env
+```
+
+Then, please run the development server. Open [http://localhost:3000](http://localhost:3000) with your browser to see the home `/` page load.
+`.env` 파일을 생성하신 후, 개발 서버를 실행하세요. 아래 해당 명령어를 실행한 후 브라우저로 [http://localhost:3000](http://localhost:3000)에 가서 홈페이지에 접속해보세요.
 
 ```bash
 npm run dev
@@ -10,30 +33,27 @@ npm run dev
 yarn dev
 # or
 pnpm dev
+# or
+bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack | 기술 스택
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- Next.js (App Router)
+- Prisma
+- TypeScript
+- Tailwind CSS
+- DaisyUI
+- SWR
+- iron-session
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## 프로젝트를 통해 얻은 것 | Lessons Learned
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Through this first-hand experience of creating and building a Next.js project, I got a better understanding of why React is considered a library while Next.js a framework.
+- Next.js 프로젝트를 만들어보면서 리액트는 왜 라이브러리이고 Next.js는 프레임워크인지 확실히 체감할 수 있었습니다.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Initially, the official iron-session dependency did not work well with Next.js's App Router, so I built the application only using the `sealData` and `unsealData` functions to encrypt and manually save the session and authentication information as cookies. Later, I came to know of renchris' [App router-compatible iron-session 버전](https://github.com/renchris/iron-session/tree/v8-as-dependency) and utilized its `getServerActionIronSession` to storage session information.
+- iron-session의 공식 버전이 Next.js App Router에는 잘 작동이 되지 않아서 초기에는 iron-session의 `sealData`, `unsealData` 함수만 사용해 세션/유저 정보를 쿠키에 직접 저장하도록 코드를 짰습니다. 그런 다음에, renchris의 [App Router에 사용 가능한 iron-session 버전](https://github.com/renchris/iron-session/tree/v8-as-dependency)을 알게 되어서 `getServerActionIronSession` 함수를 사용해 코드를 리팩토링하고 session-storage를 구현했습니다.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# NextJs-Carrot-2024
+- I also was able to experiment and work on utilizing different folders (e.g. `lib`, `hooks`, `api`, `components`) to best organize and structure my application. While I don't have the best answer for folder organization, I'm continuously thinking about how to best present my code and project.
+- 정말 귀중하다고 느꼈던 경험을 하나 꼽자면, 이번 프로젝트를 만들면서 다양한 파일이 많아진 만큼, 정리가 잘 된 폴더 구조를 만들어보는 걸 실천해봤다는 사실입니다. 아직 많이 부족하면 어떻게 하면 더 클린한 코드와 프로젝트 구조를 만들 수 있을지 고민하고 있습니다.
